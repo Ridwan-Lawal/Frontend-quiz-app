@@ -1,14 +1,31 @@
 import Image from "./Image";
 
-function ThemeSwitch() {
+function ThemeSwitch({ isDark, dispatch }) {
   return (
     <form className="flex items-center gap-3">
-      <Image icon="icon-sun-dark" />
-      <div className=" rounded-full bg-purple-600 purple w-fit flex items-center p-1 gap-4">
-        <input type="radio" checked="" name="theme" className="radio" />
-        <input type="radio" checked="" name="theme" className="radio" />
+      <Image icon={isDark ? "icon-sun-light" : "icon-sun-dark"} />
+      <div
+        onClick={() => dispatch({ type: "themeChange" })}
+        className=" rounded-full cursor-pointer bg-purple-600 purple w-fit flex items-center p-1 gap-4"
+      >
+        <input
+          type="radio"
+          checked={isDark}
+          name="theme"
+          className={`radio transition-all duration-500  cursor-pointer ${
+            !isDark ? "opacity-100" : "opacity-0"
+          } `}
+        />
+        <input
+          type="radio"
+          checked={isDark}
+          name="theme"
+          className={`radio transition-all duration-500  cursor-pointer ${
+            isDark ? "opacity-100" : "opacity-0"
+          } `}
+        />
       </div>
-      <Image icon="icon-moon-dark" />
+      <Image icon={isDark ? "icon-moon-light" : "icon-moon-dark"} />
     </form>
   );
 }

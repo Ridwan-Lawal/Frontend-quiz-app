@@ -7,7 +7,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        red: "#EE5454",
+        reds: "#EE5454",
         white: "#fff",
         pink: "#A729F5",
         almostDark: "#313E51",
@@ -15,7 +15,7 @@ module.exports = {
         grays: "#626C7F",
         lightGray: "#ABC1E1",
         almostWhite: "#F4F6FA",
-        green: "#26D782",
+        greens: "#26D782",
       },
 
       backgroundImage: {

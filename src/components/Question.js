@@ -1,9 +1,14 @@
 import Button from "./Button";
 import NextButton from "./NextButton";
+import { MdOutlineCancel } from "react-icons/md";
 
-function Question() {
+function Question({ isDark }) {
   return (
-    <div className="text-almostDark  mt-14 md:mt-16 lg:flex lg:items-start lg:justify-between">
+    <div
+      className={`${
+        isDark ? "text-almostWhite" : "text-almostDark"
+      }   mt-14 md:mt-16 lg:flex lg:items-start lg:justify-between`}
+    >
       {/* question and progress */}
       <section className="lg:flex lg:flex-col lg:justify-between  lg:h-[400px] ">
         <div className="mb-1">
@@ -23,9 +28,10 @@ function Question() {
           <Button
             textstyling="text-darkGray"
             padding="py-2.5 px-3.5"
-            bgColor="bg-lightGray"
+            bgColor="bg-gray-100"
             content="Lorem ipsum dolor sit amet."
             buttonPadding="p-3 sm:p-4 lg:p-5"
+            isDark={isDark}
           >
             A
           </Button>
@@ -54,13 +60,15 @@ function Question() {
             bgColor="bg-lightGray"
             content="Lorem ipsum dolor sit amet."
           >
-            D
+            d
           </Button>
         </div>
         {/* Button for going to the next question */}
         <NextButton />
 
-        <p></p>
+        <p className="text-red-400 justify-center text-lg sm:text-[22px] mt-6 flex gap-4 items-center">
+          <MdOutlineCancel /> Please select an answer
+        </p>
       </section>
     </div>
   );

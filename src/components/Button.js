@@ -7,16 +7,20 @@ function Button({
   textstyling,
   padding,
   buttonPadding = "p-4",
+  isDark,
 }) {
   return (
     <button
-      className={`shadow-md shadow-gray-200 ${buttonPadding} bg-white rounded-xl flex w-full  gap-8 items-center`}
+      className={`shadow-md ${
+        isDark ? "bg-darkGray shadow-almostDark" : "bg-white shadow-gray-200"
+      }  ${buttonPadding}  rounded-xl flex w-full  gap-8 items-center`}
     >
       <Subject
         content={content}
         bgColor={bgColor}
         padding={padding}
         textstyling={textstyling}
+        isDark={isDark}
       >
         {children}
       </Subject>
