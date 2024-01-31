@@ -15,7 +15,7 @@ function OptionButton({
   correctAnswer,
   hover,
 }) {
-  let border = "border-white";
+  let border = "";
   let optionBgColor = "bg-almostWhite";
   let optionTextColor;
   let answer;
@@ -52,11 +52,13 @@ function OptionButton({
       disabled={disabled}
       className={`shadow-md ${
         !disabled && hover
-      } transition-colors duration-400 border-[3px]  ${border}  ${
-        isDark ? "bg-darkGray shadow-almostDark" : "bg-white shadow-gray-200"
+      } transition-colors duration-400   ${border} border-[3px] ${
+        isDark && !border && "border-darkGray"
+      } ${!isDark && !border && "border-white"} ${
+        isDark ? "bg-darkGray  shadow-almostDark" : "bg-white  shadow-gray-200"
       }  ${buttonPadding} ${textstyling} relative  rounded-xl flex w-full ${
         disabled && "cursor-not-allowed"
-      }  gap-8 items-center flex`}
+      }  gap-8 group items-center flex`}
     >
       <Subject
         content={content}
@@ -69,10 +71,10 @@ function OptionButton({
       </Subject>
 
       {answer === "correct" && (
-        <img src="/icon-correct.svg" icon="icon" className=" ml-auto" />
+        <img src="/icon-correct.svg" icon="icon" className=" ml-auto w-8" />
       )}
       {answer === "wrong" && (
-        <img src="/icon-error.svg" alt="icon" className="ml-auto" />
+        <img src="/icon-error.svg" alt="icon" className="ml-auto w-8" />
       )}
     </button>
   );

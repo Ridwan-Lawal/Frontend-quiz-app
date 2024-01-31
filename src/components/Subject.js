@@ -9,7 +9,7 @@ function Subject({
   return (
     <>
       <section
-        className={`${bgColor} text-lg sm:text-[24px] font-semibold ${textstyling}  ${padding} rounded-md`}
+        className={`${bgColor} text-lg sm:text-[24px] font-semibold ${textstyling} transition-colors duration-400 ${padding} group-hover:text-purple-600 rounded-md`}
       >
         {children}
       </section>

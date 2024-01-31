@@ -6,12 +6,13 @@ import Question from "./components/Question";
 import StartScreen from "./components/StartScreen";
 import Error from "./components/Error";
 import Loader from "./components/Loader";
+import { useSubjects } from "./components/useSubjects";
 
 // play again functionality
 // also i want to display a button finish quiz when i submit the last quesiton
 
 const initialState = {
-  isDark: false,
+  isDark: JSON.parse(localStorage.getItem("quizTheme")),
   status: "loading",
   error: "",
   subjects: [],
@@ -93,37 +94,21 @@ function App() {
     points,
   } = state;
 
+  // for getting the fetching the subjects
+  useSubjects(dispatch);
+
   const numQuestions = subjectSelected?.questions?.length;
 
   const bgStyle = isDark
     ? "bg-mobileDarkBackground sm:bg-tabletDarkBackground  lg:bg-desktopDarkBackground "
     : "bg-mobileLightBackground sm:bg-tabletLightBackground  lg:bg-desktopLightBackground";
 
-  // to fetch questions
-
-  useEffect(function () {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    async function getQuestions() {
-      try {
-        const res = await fetch(`http://localhost:3002/quizzes`, { signal });
-
-        if (!res.ok) throw new Error("Something went wrong fetching questions");
-
-        const data = await res.json();
-        console.log(data);
-        dispatch({ type: "dataFetched", payload: data });
-      } catch (err) {
-        if (err.name === "AbortError") return;
-
-        dispatch({ type: "dataFailed", payload: err.message });
-      }
-    }
-
-    getQuestions();
-
-    return () => abortController.abort();
-  }, []);
+  useEffect(
+    function () {
+      localStorage.setItem("quizTheme", JSON.stringify(isDark));
+    },
+    [isDark]
+  );
 
   return (
     <div

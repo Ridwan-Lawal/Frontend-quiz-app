@@ -50,7 +50,7 @@ function Question({
               onClick={() => {
                 dispatch({ type: "answerSelected", payload: option });
               }}
-              hover="hover:border-purple-600"
+              hover="hover:border-[3px] hover:border-purple-600"
             >
               {i === 0 && "A"}
               {i === 1 && "B"}
