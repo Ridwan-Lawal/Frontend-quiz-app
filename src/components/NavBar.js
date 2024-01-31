@@ -2,7 +2,7 @@ import Subject from "./Subject";
 import Image from "./Image";
 import ThemeSwitch from "./ThemeSwitch";
 
-function NavBar({ content = "HTML", children, isDark, dispatch }) {
+function NavBar({ content, children, isDark, dispatch }) {
   const subjectBgColor = `${content === "HTML" && "bg-red-50"} ${
     content === "CSS" && "bg-green-50"
   } ${content === "JavaScript" && "bg-blue-50"} ${
@@ -17,6 +17,7 @@ function NavBar({ content = "HTML", children, isDark, dispatch }) {
           bgColor={subjectBgColor}
           opacity={isDark ? "bg-opacity-100" : "bg-opacity-10"}
           isDark={isDark}
+          content={content}
         >
           {children}
         </Subject>

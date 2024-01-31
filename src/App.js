@@ -1,16 +1,25 @@
 import { useEffect, useReducer } from "react";
-import Button from "./components/Button";
+import Button from "./components/OptionButton";
 import FinishScreen from "./components/FinishScreen";
 import NavBar from "./components/NavBar";
 import Question from "./components/Question";
 import StartScreen from "./components/StartScreen";
 import Error from "./components/Error";
+import Loader from "./components/Loader";
+
+// play again functionality
+// also i want to display a button finish quiz when i submit the last quesiton
 
 const initialState = {
   isDark: false,
   status: "loading",
   error: "",
   subjects: [],
+  subjectSelected: [],
+  answerSelected: "",
+  isSubmitClicked: false,
+  index: 0,
+  points: 0,
 };
 function reducer(state, action) {
   switch (action.type) {
@@ -24,7 +33,36 @@ function reducer(state, action) {
       return { ...state, subjects: action.payload, status: "ready" };
 
     case "active":
-      return { ...state, status: "active" };
+      return { ...state, status: "active", subjectSelected: action.payload };
+
+    case "answerSelected":
+      return {
+        ...state,
+        answerSelected: action.payload,
+        isSubmitClicked: false,
+      };
+
+    case "submitClick":
+      return {
+        ...state,
+        isSubmitClicked: true,
+        points:
+          state.answerSelected === action.payload
+            ? state.points + 1
+            : state.points,
+      };
+
+    case "nextQuestion":
+      return {
+        ...state,
+        index: state.index + 1,
+        answerSelected: "",
+        isSubmitClicked: false,
+        status:
+          state.index === state.subjectSelected.questions.length - 1
+            ? "finished"
+            : state.status,
+      };
 
     default:
       throw new Error("Unknown error");
@@ -33,7 +71,19 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { isDark, status, subjects, error } = state;
+  const {
+    isDark,
+    status,
+    subjects,
+    error,
+    subjectSelected,
+    index,
+    answerSelected,
+    isSubmitClicked,
+    points,
+  } = state;
+
+  const numQuestions = subjectSelected?.questions?.length;
 
   const bgStyle = isDark
     ? "bg-mobileDarkBackground sm:bg-tabletDarkBackground  lg:bg-desktopDarkBackground "
@@ -77,22 +127,46 @@ function App() {
         }  min-h-screen  px-8 sm:px-14 py-7 sm:py-10 transition-colors duration-1000 `}
       >
         <div className="max-w-5xl mx-auto">
-          <NavBar isDark={isDark} dispatch={dispatch}>
-            <img src="/icon-html.svg" alt="" className="w-8" />
+          <NavBar
+            isDark={isDark}
+            content={subjectSelected?.title}
+            dispatch={dispatch}
+          >
+            <img src={subjectSelected?.icon} alt="" className="w-8" />
           </NavBar>
 
-          <Error error={error} />
+          {status === "loading" && <Loader isDark={isDark} />}
 
-          {/* {status === "ready" && (
+          {status === "error" && <Error error={error} />}
+
+          {status === "ready" && (
             <StartScreen
               isDark={isDark}
               subjects={subjects}
               dispatch={dispatch}
             />
           )}
-          {status === "active" && <Question isDark={isDark} />} */}
+          {status === "active" && (
+            <Question
+              isDark={isDark}
+              question={subjectSelected?.questions[index]}
+              index={index}
+              dispatch={dispatch}
+              answerSelected={answerSelected}
+              isSubmitClicked={isSubmitClicked}
+              numQuestions={numQuestions}
+            />
+          )}
 
-          {/* <FinishScreen isDark={isDark} /> */}
+          {status === "finished" && (
+            <FinishScreen
+              isDark={isDark}
+              numQuestions={numQuestions}
+              points={points}
+              subjectType={subjectSelected?.title}
+              subjectImage={subjectSelected?.icon}
+            />
+          )}
         </div>
       </div>
     </div>

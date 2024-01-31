@@ -1,7 +1,13 @@
 import Image from "./Image";
 import Subject from "./Subject";
 
-function FinishScreen({ isDark, subjectType = "HTML" }) {
+function FinishScreen({
+  isDark,
+  subjectType = "HTML",
+  points,
+  numQuestions,
+  subjectImage,
+}) {
   const subjectBgColor = `${subjectType === "HTML" && "bg-red-50"} ${
     subjectType === "CSS" && "bg-green-50"
   } ${subjectType === "JavaScript" && "bg-blue-50"} ${
@@ -32,11 +38,13 @@ function FinishScreen({ isDark, subjectType = "HTML" }) {
               content={subjectType}
               isDark={isDark}
             >
-              <Image icon="icon-html" width="w-8" />
+              <Image icon={subjectImage.slice(2, -4)} width="w-8" />
             </Subject>
           </div>
-          <p className="text-[90px] md:text-[110px] font-semibold">3</p>
-          <p className={`text-xl ${isDark && "text-gray-200"} `}>Out of X</p>
+          <p className="text-[90px] md:text-[110px] font-semibold">{points}</p>
+          <p className={`text-xl ${isDark && "text-gray-200"} `}>
+            Out of {numQuestions}
+          </p>
         </section>
 
         <button className="play-again">Play Again</button>

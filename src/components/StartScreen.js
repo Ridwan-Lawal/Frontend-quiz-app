@@ -1,4 +1,5 @@
-import Button from "./Button";
+import Button from "./OptionButton";
+import SubjectButton from "./SubjectButton";
 
 function StartScreen({ isDark, subjects, dispatch }) {
   return (
@@ -20,16 +21,16 @@ function StartScreen({ isDark, subjects, dispatch }) {
 
       {/* subjects */}
       <section className="mt-9 sm:mt-11 md:mt-12 space-y-4 sm:space-y-6">
-        {subjects.map((subject, i) => (
-          <Button
-            key={i}
-            onClick={() => dispatch({ type: "active" })}
+        {subjects.map((subject) => (
+          <SubjectButton
+            key={subject?.id}
+            onClick={() => dispatch({ type: "active", payload: subject })}
             content={subject?.title}
             bgColor={subject?.bgColor}
             isDark={isDark}
           >
             <img src={subject?.icon} alt="" className="w-8" />
-          </Button>
+          </SubjectButton>
         ))}
       </section>
     </div>

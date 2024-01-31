@@ -1,7 +1,7 @@
 function Subject({
   bgColor = "bg-red",
   children,
-  content = "HTML",
+  content,
   padding = "p-1 ",
   textstyling,
   isDark,
