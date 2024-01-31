@@ -69,20 +69,15 @@ function Question({
           />
         )} */}
 
-        {/* button for going to the next question */}
-        {isSubmitClicked && answerSelected ? (
-          <NextButton
-            content="Next Question"
-            onClick={() => dispatch({ type: "nextQuestion" })}
-          />
-        ) : (
-          <NextButton
-            content="Submit Answer"
-            onClick={() =>
-              dispatch({ type: "submitClick", payload: question.answer })
-            }
-          />
-        )}
+        {/* button for going to the next question and submit and also finish quiz */}
+        <NextButton
+          dispatch={dispatch}
+          isSubmitClicked={isSubmitClicked}
+          answerSelected={answerSelected}
+          question={question}
+          questionIndex={index}
+          numQuestions={numQuestions}
+        />
 
         {isSubmitClicked && !answerSelected && (
           <p className="text-red-400 justify-center text-lg sm:text-[22px] mt-6 flex gap-4 items-center">

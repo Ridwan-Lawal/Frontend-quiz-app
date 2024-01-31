@@ -15,7 +15,7 @@ const initialState = {
   status: "loading",
   error: "",
   subjects: [],
-  subjectSelected: [],
+  subjectSelected: {},
   answerSelected: "",
   isSubmitClicked: false,
   index: 0,
@@ -58,11 +58,21 @@ function reducer(state, action) {
         index: state.index + 1,
         answerSelected: "",
         isSubmitClicked: false,
-        status:
-          state.index === state.subjectSelected.questions.length - 1
-            ? "finished"
-            : state.status,
       };
+
+    case "playAgain":
+      return {
+        ...state,
+        status: "ready",
+        error: "",
+        subjectSelected: {},
+        answerSelected: "",
+        isSubmitClicked: false,
+        index: 0,
+        points: 0,
+      };
+    case "finishQuiz":
+      return { ...state, status: "finished" };
 
     default:
       throw new Error("Unknown error");
@@ -165,6 +175,7 @@ function App() {
               points={points}
               subjectType={subjectSelected?.title}
               subjectImage={subjectSelected?.icon}
+              dispatch={dispatch}
             />
           )}
         </div>

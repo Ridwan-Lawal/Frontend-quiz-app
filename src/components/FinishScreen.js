@@ -3,10 +3,11 @@ import Subject from "./Subject";
 
 function FinishScreen({
   isDark,
-  subjectType = "HTML",
+  subjectType,
   points,
   numQuestions,
   subjectImage,
+  dispatch,
 }) {
   const subjectBgColor = `${subjectType === "HTML" && "bg-red-50"} ${
     subjectType === "CSS" && "bg-green-50"
@@ -47,7 +48,12 @@ function FinishScreen({
           </p>
         </section>
 
-        <button className="play-again">Play Again</button>
+        <button
+          onClick={() => dispatch({ type: "playAgain" })}
+          className="play-again"
+        >
+          Play Again
+        </button>
       </div>
     </div>
   );
