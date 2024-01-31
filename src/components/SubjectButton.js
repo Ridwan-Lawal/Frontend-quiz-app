@@ -12,8 +12,8 @@ function SubjectButton({
   return (
     <button
       onClick={onClick}
-      className={`shadow-md  transition-colors duration-400   ${
-        isDark ? "bg-darkGray shadow-almostDark" : "bg-white shadow-gray-100"
+      className={`shadow-lg  transition-colors duration-400   ${
+        isDark ? "bg-darkGray shadow-almostDark" : "bg-white shadow-gray-200"
       }  p-4 ${textStyling} relative  rounded-xl flex w-full   gap-8 items-center `}
     >
       <Subject

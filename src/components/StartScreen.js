@@ -4,9 +4,9 @@ import SubjectButton from "./SubjectButton";
 function StartScreen({ isDark, subjects, dispatch }) {
   return (
     <div
-      className={`mt-14 md:mt-16 text-almostDark ${
+      className={`mt-16 lg:mt-24 text-almostDark ${
         isDark ? "text-almostWhite" : "text-almostDark"
-      } transition-all`}
+      } transition-all lg:flex items-start justify-between lg:max-w-6xl mx-auto `}
     >
       <section>
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-light">
@@ -20,7 +20,7 @@ function StartScreen({ isDark, subjects, dispatch }) {
       </section>
 
       {/* subjects */}
-      <section className="mt-9 sm:mt-11 md:mt-12 space-y-4 sm:space-y-6">
+      <section className="mt-9 lg:w-[50%] lg:mt-0 sm:mt-11 md:mt-12 space-y-4 sm:space-y-6">
         {subjects.map((subject) => (
           <SubjectButton
             key={subject?.id}

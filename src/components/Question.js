@@ -18,10 +18,10 @@ function Question({
     <div
       className={`${
         isDark ? "text-almostWhite" : "text-almostDark"
-      }   mt-14 md:mt-16 lg:flex lg:items-start lg:justify-between`}
+      }   mt-14 md:mt-16 lg:flex lg:items-start lg:justify-between gap-8`}
     >
       {/* question and progress */}
-      <section className="lg:flex lg:flex-col lg:justify-between  lg:h-[400px] ">
+      <section className="lg:flex lg:flex-col lg:justify-between  lg:h-[400px] w-[50%] ">
         <div className="mb-3">
           <p className="italic text-[15px] sm:text-lg lg:text-[20px] ">
             Question {index + 1} of {numQuestions}
@@ -34,7 +34,7 @@ function Question({
       </section>
 
       {/* options */}
-      <section>
+      <section className="w-[50%]">
         <div className="space-y-5 mt-12 sm:mt-16 lg:mt-0">
           {question?.options.map((option, i) => (
             <OptionButton
