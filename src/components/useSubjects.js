@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useSubjects(dispatch) {
+export function useSubjects(dispatch, quizzes) {
   useEffect(function () {
     const abortController = new AbortController();
     const signal = abortController.signal;
@@ -14,7 +14,7 @@ export function useSubjects(dispatch) {
         dispatch({ type: "dataFetched", payload: data });
       } catch (err) {
         if (err.name === "AbortError") return;
-        dispatch({ type: "dataFailed", payload: err.message });
+        dispatch({ type: "dataFailed", payload: quizzes });
       }
     }
 

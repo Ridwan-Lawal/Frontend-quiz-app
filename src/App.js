@@ -7,6 +7,7 @@ import StartScreen from "./components/StartScreen";
 import Error from "./components/Error";
 import Loader from "./components/Loader";
 import { useSubjects } from "./components/useSubjects";
+import quizzes from "./data.json";
 
 // play again functionality
 // also i want to display a button finish quiz when i submit the last quesiton
@@ -95,7 +96,7 @@ function App() {
   } = state;
 
   // for getting the fetching the subjects
-  useSubjects(dispatch);
+  useSubjects(dispatch, quizzes);
 
   const numQuestions = subjectSelected?.questions?.length;
 
@@ -132,7 +133,7 @@ function App() {
 
           {status === "loading" && <Loader isDark={isDark} />}
 
-          {status === "error" && <Error error={error} />}
+          {status === "error" && <Error error={error} isDark={isDark} />}
 
           {status === "ready" && (
             <StartScreen

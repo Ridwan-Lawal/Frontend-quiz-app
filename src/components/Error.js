@@ -1,7 +1,13 @@
-function Error({ error }) {
+function Error({ error, isDark }) {
   return (
     <div className="flex mt-20 justify-center items-center">
-      <p className="text-blue-950 italic text-2xl text-center">{error}</p>
+      <p
+        className={` italic text-2xl text-center ${
+          isDark ? "text-white" : "text-blue-950"
+        } `}
+      >
+        {error}
+      </p>
     </div>
   );
 }
